@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -94,11 +95,18 @@ namespace tdd_approach
         public void ShouldReturn_10_When_Sum_5_and_5_withLetters()
         {
             var calc = new StringCalculator();
-            Assert.Throws<Exception>(() => calc.Add("5A, 5B") );
+            var result = calc.Add("5A,5B");
+            Assert.Equal(10,result);
             
         }
         
-        
+        [Fact]
+        public void Should_Ignore_Numbers_Greater_Than_1000()
+        {
+            var calc =  new StringCalculator();
+            var result = calc.Add("1000, 1001, 1");
+            Assert.Equal(1001, result);
+        }
         
 
         //IntMax + IntMax

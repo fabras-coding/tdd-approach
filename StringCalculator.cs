@@ -15,21 +15,23 @@ namespace tdd_approach
             if(string.IsNullOrEmpty(numbers))
                 return result;
 
-            
-            
             var sNumbers = Utils.DetectAndRemoveTokens(numbers).Split(',');
             List<int> negatives = new List<int>();                        
             
+
             for(int i=0; i < sNumbers.Length; i++)
             {
                 string number = sNumbers[i];
                 foreach(var c in number)
                 {
-                    if(!(c >= '0') && !(c <= '9'))
-                        number = "0";
+                    if(!(c >= '0' && c <= '9'))
+                        number = number.Replace(c.ToString(), "");
                 }
 
                 int sumNumber = number != "" ? Int16.Parse(number) : 0;
+                
+                if(sumNumber > 1000)
+                    sumNumber =0;
 
                 if(sumNumber < 0)
                     negatives.Add(sumNumber);
